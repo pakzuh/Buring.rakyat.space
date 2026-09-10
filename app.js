@@ -117,27 +117,27 @@ function renderMerchantDirectory() {
     const shortOwner = m.owner.replace(/\s*\(.*?\)/g, "").trim();
 
     html += `
-      <div onclick="selectMerchant('\${m.id}')" 
-        class="cursor-pointer group relative bg-white rounded-2xl border transition-all duration-200 overflow-hidden flex flex-col justify-between hover:shadow-lg hover:-translate-y-0.5 \${
+      <div onclick="selectMerchant('${m.id}')" 
+        class="cursor-pointer group relative bg-white rounded-2xl border transition-all duration-200 overflow-hidden flex flex-col justify-between hover:shadow-lg hover:-translate-y-0.5 ${
           isActive 
             ? "border-emerald-500 ring-2 ring-emerald-500/50 shadow-md bg-emerald-50/20" 
             : "border-slate-200/90 shadow-xs hover:border-emerald-300"
         }">
         
         <!-- Header Visual Ilustrasi Bisnis -->
-        <div class="h-20 sm:h-24 bg-gradient-to-tr \${vis.gradient} p-2.5 sm:p-3 flex flex-col justify-between relative overflow-hidden select-none">
-          \${vis.svgIllustration}
+        <div class="h-20 sm:h-24 bg-gradient-to-tr ${vis.gradient} p-2.5 sm:p-3 flex flex-col justify-between relative overflow-hidden select-none">
+          ${vis.svgIllustration}
           <div class="flex items-center justify-between z-10">
             <span class="w-8 h-8 rounded-xl bg-white/95 backdrop-blur-xs flex items-center justify-center text-lg shadow-sm">
-              \${m.avatar}
+              ${m.avatar}
             </span>
-            <span class="text-[9px] sm:text-[10px] font-extrabold px-2 py-0.5 rounded-full \${vis.statusClass} shadow-xs">
-              \${vis.statusText}
+            <span class="text-[9px] sm:text-[10px] font-extrabold px-2 py-0.5 rounded-full ${vis.statusClass} shadow-xs">
+              ${vis.statusText}
             </span>
           </div>
           <div class="z-10">
             <span class="text-[10px] sm:text-[11px] font-bold text-white/95 drop-shadow-xs block tracking-wide uppercase">
-              PIC: \${shortOwner}
+              PIC: ${shortOwner}
             </span>
           </div>
         </div>
@@ -146,19 +146,19 @@ function renderMerchantDirectory() {
         <div class="p-2.5 sm:p-3 flex-1 flex flex-col justify-between">
           <div>
             <h4 class="font-bold text-slate-900 text-xs sm:text-sm leading-snug group-hover:text-emerald-600 transition-colors line-clamp-1">
-              \${m.name}
+              ${m.name}
             </h4>
             <p class="text-[10px] sm:text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-              \${m.tagline}
+              ${m.tagline}
             </p>
           </div>
 
           <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between">
             <span class="text-[9px] sm:text-[10px] font-bold text-slate-500">
-              \${m.products.length} Menu
+              ${m.products.length} Menu
             </span>
             <span class="text-[10px] sm:text-[11px] font-bold text-emerald-600 flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
-              <span>\${isActive ? "Aktif" : "Buka Menu"}</span>
+              <span>${isActive ? "Aktif" : "Buka Menu"}</span>
               <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </span>
           </div>
