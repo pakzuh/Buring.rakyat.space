@@ -493,49 +493,65 @@ window.BURING_MERCHANTS = [
     ]
   },
   {
-    id: "mlijo-buring",
-    name: "Mlijo Keliling & Dapur Buring",
-    owner: "Mlijo Warga",
-    tagline: "Sayur mayur petik segar, bumbu dapur ulek & lauk harian antar ke depan pintu",
-    category: "Sayur Mayur & Dapur",
-    phone: "6281234567890",
+    id: "omah-etas-djawara",
+    name: "Aqiqah Omah Etas D'Jawara",
+    owner: "Omah Etas",
+    tagline: "Spesialis Catering Aqiqah, Nasi Kebuli & Masakan Kambing",
+    category: "Katering & Aqiqah",
+    phone: "6281234567890", // Replace with real phone later if provided
     status: "open",
-    schedule: "Keliling jam 06.00–09.00 WIB | Order Malam Ready Pagi",
-    avatar: "🥬",
-    badgeColor: "bg-green-600",
+    schedule: "Pemesanan H-1 s/d H-7 | Gratis Antar se-Malang Raya",
+    avatar: "🐐",
+    badgeColor: "bg-orange-600",
     products: [
       {
-        id: "mlijo-1",
-        name: "Paket Sayur Asem Komplit",
-        price: 6000,
-        category: "Paket Sayur",
-        description: "Jagung manis, labu siam, kacang panjang, melinjo, daun so & bumbu asem siap masak",
+        id: "etas-1",
+        name: "Promo Aqiqah Hemat — Anak Laki-laki",
+        price: 4500000,
+        category: "Paket Aqiqah",
+        description: "Kambing 2 ekor, nasi putih, sate 300 tusuk, krengsengan, gule, buncis wortel (100 box). Gratis ongkir & sertifikat.",
         hasLevel: false
       },
       {
-        id: "mlijo-2",
-        name: "Paket Sayur Sop Sehat",
-        price: 6000,
-        category: "Paket Sayur",
-        description: "Wortel, buncis, kentang, kubis, seledri & daun bawang segar",
-        hasLevel: false
-      },
-      {
-        id: "mlijo-3",
-        name: "Bayam / Kangkung Segar (2 Ikat)",
-        price: 5000,
-        category: "Sayuran Daun",
-        description: "Sayur bayam hijau segar atau kangkung hidroponik petik pagi",
+        id: "etas-2",
+        name: "Paket Aqiqah Bronze — Anak Perempuan",
+        price: 2150000,
+        category: "Paket Aqiqah",
+        description: "1 Ekor Kambing. Hasil masakan: 150 tusuk sate, krengsengan 40 porsi, gule 40 porsi.",
         options: [
-          { name: "Pilihan", choices: ["2 Ikat Bayam Segar", "2 Ikat Kangkung", "1 Bayam + 1 Kangkung"] }
+          { name: "Pilihan Penyajian", choices: ["Prasmanan (Panci)", "Nasi Box Lengkap (+ Biaya Box)"] }
         ]
       },
       {
-        id: "mlijo-4",
-        name: "Tempe Daun & Tahu Putih",
-        price: 5000,
-        category: "Lauk Mentah",
-        description: "Tempe kedelai bungkus daun wangi tradisional + 1 papan tahu sutra putih",
+        id: "etas-3",
+        name: "Nasi Kebuli Ayam (Bento)",
+        price: 20000,
+        category: "Nasi Kebuli",
+        description: "Nasi kebuli basmati dengan lauk Ayam bumbu rempah khas. Praktis dalam kemasan Bento.",
+        hasLevel: false
+      },
+      {
+        id: "etas-4",
+        name: "Nasi Kebuli Kambing (Nampan 5 Porsi)",
+        price: 225000,
+        category: "Nasi Kebuli",
+        description: "Nasi kebuli basmati dengan daging Kambing muda (5 porsi) disajikan di atas nampan besar khas Timur Tengah.",
+        hasLevel: false
+      },
+      {
+        id: "etas-5",
+        name: "Ayam Bakar Ingkung Utuh",
+        price: 175000,
+        category: "Catering",
+        description: "1 ekor ayam merah bakar utuh, nasi liwet 5 porsi, bacem tahu 10 porsi, sambal, lalapan dalam 1 kardus.",
+        hasLevel: false
+      },
+      {
+        id: "etas-6",
+        name: "Nasi Campur Jumat Berkah",
+        price: 12000,
+        category: "Catering",
+        description: "Nasi putih, telur balado, oseng kacang tempe, mie. Cocok untuk sedekah Jumat.",
         hasLevel: false
       }
     ]

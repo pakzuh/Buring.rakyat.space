@@ -92,6 +92,16 @@ function getMerchantVisuals(merchantId) {
           <path d="M8 6h8v2H8V6zm-4 4V8h2v2H4zm-2 2v-2h2v2H2zm22-2v2h-2v-2h2zm-2-2v2h-2V8h2zm-2-2v2h-2V6h2zM4 14v-2h16v2H4zm2 2v-2h12v2H6zm2 2v-2h8v2H8z"/>
         </svg>
       `
+    },
+    "omah-etas-djawara": {
+      gradient: "from-amber-500 via-orange-500 to-rose-500",
+      statusText: "★ Premium",
+      statusClass: "bg-rose-500 text-white",
+      svgIllustration: `
+        <svg class="absolute -right-3 -bottom-3 w-20 h-20 text-white/20 select-none pointer-events-none" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+      `
     }
   };
   return visuals[merchantId] || {
