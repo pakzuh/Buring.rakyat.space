@@ -74,9 +74,9 @@ function initEventListeners() {
 function getMerchantVisuals(merchantId) {
   const visuals = {
     "warung-mbak-ita": {
-      gradient: "from-amber-400 via-orange-500 to-amber-600",
+      gradient: "from-teal-400 via-emerald-500 to-teal-600",
       statusText: "● Buka",
-      statusClass: "bg-amber-500 text-white",
+      statusClass: "bg-emerald-500 text-white",
       svgIllustration: `
         <svg class="absolute -right-3 -bottom-3 w-20 h-20 text-white/20 select-none pointer-events-none" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
@@ -185,7 +185,7 @@ function renderMerchantTabs() {
         <span class="text-slate-400">🏪</span>
       </div>
       <select onchange="selectMerchant(this.value)" 
-        class="w-full sm:w-64 pl-10 pr-8 py-2.5 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm shadow-xs focus:outline-none focus:border-emerald-600 font-semibold text-slate-700 appearance-none cursor-pointer">
+        class="w-full sm:w-64 pl-10 pr-8 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs sm:text-sm shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500/50 font-semibold text-white appearance-none cursor-pointer">
         <option value="all" ${state.activeMerchant === "all" ? "selected" : ""}>🌟 Tampilkan Semua Warung (${merchants.length})</option>
   `;
 
