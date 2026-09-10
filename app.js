@@ -43,6 +43,7 @@ function initApp() {
     return;
   }
   renderMerchantTabs();
+  renderMerchantDirectory();
   renderCategoryPills();
   renderProducts();
   updateCartBadge();
@@ -67,6 +68,107 @@ function initEventListeners() {
   }
 
   // Profile fields are now dynamically rendered in cart drawer with inline oninput
+}
+
+// Visual Data Warung Buring
+function getMerchantVisuals(merchantId) {
+  const visuals = {
+    "warung-mbak-ita": {
+      gradient: "from-amber-400 via-orange-500 to-amber-600",
+      statusText: "● Buka",
+      statusClass: "bg-amber-500 text-white",
+      svgIllustration: `
+        <svg class="absolute -right-3 -bottom-3 w-20 h-20 text-white/20 select-none pointer-events-none" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        </svg>
+      `
+    },
+    "warung-mak-jum": {
+      gradient: "from-emerald-400 via-teal-500 to-emerald-600",
+      statusText: "● Lauk Pagi",
+      statusClass: "bg-emerald-500 text-white",
+      svgIllustration: `
+        <svg class="absolute -right-3 -bottom-3 w-20 h-20 text-white/20 select-none pointer-events-none" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M8 6h8v2H8V6zm-4 4V8h2v2H4zm-2 2v-2h2v2H2zm22-2v2h-2v-2h2zm-2-2v2h-2V8h2zm-2-2v2h-2V6h2zM4 14v-2h16v2H4zm2 2v-2h12v2H6zm2 2v-2h8v2H8z"/>
+        </svg>
+      `
+    }
+  };
+  return visuals[merchantId] || {
+    gradient: "from-emerald-500 to-teal-500",
+    statusText: "Buka",
+    statusClass: "bg-emerald-500 text-white",
+    svgIllustration: ""
+  };
+}
+
+// Render Showcase Direktori Warung Buring
+function renderMerchantDirectory() {
+  const container = document.getElementById("merchant-directory-grid");
+  if (!container) return;
+
+  const merchants = window.BURING_MERCHANTS || BURING_MERCHANTS;
+  if (!merchants) return;
+
+  let html = "";
+  merchants.forEach((m) => {
+    const isActive = state.activeMerchant === m.id;
+    const vis = getMerchantVisuals(m.id);
+    const shortOwner = m.owner.replace(/\s*\(.*?\)/g, "").trim();
+
+    html += `
+      <div onclick="selectMerchant('\${m.id}')" 
+        class="cursor-pointer group relative bg-white rounded-2xl border transition-all duration-200 overflow-hidden flex flex-col justify-between hover:shadow-lg hover:-translate-y-0.5 \${
+          isActive 
+            ? "border-emerald-500 ring-2 ring-emerald-500/50 shadow-md bg-emerald-50/20" 
+            : "border-slate-200/90 shadow-xs hover:border-emerald-300"
+        }">
+        
+        <!-- Header Visual Ilustrasi Bisnis -->
+        <div class="h-20 sm:h-24 bg-gradient-to-tr \${vis.gradient} p-2.5 sm:p-3 flex flex-col justify-between relative overflow-hidden select-none">
+          \${vis.svgIllustration}
+          <div class="flex items-center justify-between z-10">
+            <span class="w-8 h-8 rounded-xl bg-white/95 backdrop-blur-xs flex items-center justify-center text-lg shadow-sm">
+              \${m.avatar}
+            </span>
+            <span class="text-[9px] sm:text-[10px] font-extrabold px-2 py-0.5 rounded-full \${vis.statusClass} shadow-xs">
+              \${vis.statusText}
+            </span>
+          </div>
+          <div class="z-10">
+            <span class="text-[10px] sm:text-[11px] font-bold text-white/95 drop-shadow-xs block tracking-wide uppercase">
+              PIC: \${shortOwner}
+            </span>
+          </div>
+        </div>
+
+        <!-- Body Info Usaha -->
+        <div class="p-2.5 sm:p-3 flex-1 flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-slate-900 text-xs sm:text-sm leading-snug group-hover:text-emerald-600 transition-colors line-clamp-1">
+              \${m.name}
+            </h4>
+            <p class="text-[10px] sm:text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+              \${m.tagline}
+            </p>
+          </div>
+
+          <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-[9px] sm:text-[10px] font-bold text-slate-500">
+              \${m.products.length} Menu
+            </span>
+            <span class="text-[10px] sm:text-[11px] font-bold text-emerald-600 flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
+              <span>\${isActive ? "Aktif" : "Buka Menu"}</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </span>
+          </div>
+        </div>
+
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
 }
 
 // Render Tabs Merchant
@@ -247,7 +349,7 @@ function renderProducts() {
           </span>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3.5">
           ${matchingProducts
             .map((product) => renderProductCard(merchant, product))
             .join("")}
@@ -276,40 +378,40 @@ function renderProductCard(merchant, product) {
   const hasCustomization = product.hasLevel || (product.options && product.options.length > 0);
 
   return `
-    <div class="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group hover:border-emerald-300">
+    <div class="bg-white rounded-2xl border border-slate-200/80 p-2.5 sm:p-3.5 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group hover:border-emerald-300">
       <div>
-        <div class="flex items-start justify-between gap-2 mb-2">
-          <span class="inline-block px-2 py-0.5 rounded-md text-[11px] font-medium bg-emerald-50 text-emerald-800 border border-emerald-100">
+        <div class="flex items-start justify-between gap-1 mb-1.5 flex-wrap">
+          <span class="inline-block px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] font-medium bg-emerald-50 text-emerald-800 border border-emerald-100 truncate max-w-[90px] sm:max-w-none">
             ${product.category}
           </span>
           ${
             product.hasLevel
-              ? '<span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-semibold bg-red-100 text-red-700">🌶️ Request Cabai</span>'
+              ? '<span class="inline-block px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] font-semibold bg-red-100 text-red-700">🌶️ Request Cabai</span>'
               : ""
           }
         </div>
-        <h4 class="font-bold text-slate-900 text-base group-hover:text-emerald-700 transition-colors">
+        <h4 class="font-bold text-slate-900 text-xs sm:text-sm leading-snug group-hover:text-emerald-700 transition-colors line-clamp-2">
           ${product.name}
         </h4>
-        <p class="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+        <p class="text-[10px] sm:text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
           ${product.description}
         </p>
       </div>
 
-      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-        <div>
-          <span class="text-[10px] text-slate-400 block font-medium">Harga</span>
-          <span class="text-base font-extrabold text-slate-900">${formatRupiah(product.price)}</span>
+      <div class="mt-2.5 pt-2 border-t border-slate-100 flex flex-col">
+        <div class="flex items-baseline justify-between gap-1 mb-1.5">
+          <span class="text-[9px] sm:text-[10px] text-slate-400 font-medium">Mulai</span>
+          <span class="text-xs sm:text-sm font-extrabold text-slate-900">${formatRupiah(product.price)}</span>
         </div>
         <button onclick="handleProductClick('${merchant.id}', '${product.id}')" 
-          class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-xs ${
+          class="w-full py-1.5 px-2 rounded-xl text-[11px] sm:text-xs font-bold transition-all flex items-center justify-center gap-1 shadow-xs ${
             hasCustomization
               ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/20"
               : "bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/20"
           }">
           ${
             hasCustomization
-              ? `<span>Pilih Opsi</span> <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>`
+              ? `<span>Pilih Opsi</span> <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>`
               : `<span>+ Tambah</span>`
           }
         </button>
