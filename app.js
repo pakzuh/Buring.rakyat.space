@@ -171,7 +171,7 @@ function renderMerchantDirectory() {
   container.innerHTML = html;
 }
 
-// Render Tabs Merchant
+// Render Tabs Merchant (Converted to Dropdown)
 function renderMerchantTabs() {
   const container = document.getElementById("merchant-tabs");
   if (!container) return;
@@ -180,29 +180,33 @@ function renderMerchantTabs() {
   if (!merchants) return;
 
   let html = `
-    <button onclick="selectMerchant('all')" class="px-4 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
-      state.activeMerchant === "all"
-        ? "bg-slate-900 text-white shadow-md shadow-slate-900/20"
-        : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
-    }">
-      <span>🌟</span> Semua Warung (${merchants.length})
-    </button>
+    <div class="relative w-full sm:w-auto mt-1">
+      <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+        <span class="text-slate-400">🏪</span>
+      </div>
+      <select onchange="selectMerchant(this.value)" 
+        class="w-full sm:w-64 pl-10 pr-8 py-2.5 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm shadow-xs focus:outline-none focus:border-emerald-600 font-semibold text-slate-700 appearance-none cursor-pointer">
+        <option value="all" ${state.activeMerchant === "all" ? "selected" : ""}>🌟 Tampilkan Semua Warung (${merchants.length})</option>
   `;
 
   merchants.forEach((m) => {
-    const isActive = state.activeMerchant === m.id;
     html += `
-      <button onclick="selectMerchant('${m.id}')" class="px-4 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
-        isActive
-          ? "bg-slate-900 text-white shadow-md shadow-slate-900/20"
-          : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
-      }">
-        <span>${m.avatar}</span>
-        <span>${m.name}</span>
-      </button>
+        <option value="${m.id}" ${state.activeMerchant === m.id ? "selected" : ""}>
+          ${m.avatar} ${m.name}
+        </option>
     `;
   });
 
+  html += `
+      </select>
+      <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none">
+        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+      </div>
+    </div>
+  `;
+
+  // Hilangkan flex gap jika ada agar dropdown mengambil full width yang rapi
+  container.classList.remove("flex", "items-center", "gap-2");
   container.innerHTML = html;
 }
 
