@@ -775,20 +775,14 @@ function renderCartDrawer() {
       </div>
       <div class="space-y-3">
         <div>
-          <label class="block text-[11px] font-semibold text-slate-600 mb-1">Nama Pemesan <span class="text-red-500">*</span></label>
+          <label class="block text-[11px] font-semibold text-slate-600 mb-1">Nama Pemesan</label>
           <input type="text" id="buyer-name-input" value="${state.buyerName || ''}" 
             oninput="state.buyerName = this.value; localStorage.setItem('buring_buyer_name', this.value);"
             placeholder="Contoh: Bu Rina, Mas Dika" 
             class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-emerald-600 font-medium" />
         </div>
         <div>
-          <label class="block text-[11px] font-semibold text-slate-600 mb-1">No. WhatsApp <span class="text-slate-400 font-normal lowercase">(opsional)</span></label>
-          <input type="tel" id="buyer-phone-input" value="${state.buyerPhone || ''}"
-            placeholder="Contoh: 08123456789" 
-            class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-emerald-600 font-medium" />
-        </div>
-        <div>
-          <label class="block text-[11px] font-semibold text-slate-600 mb-1">Alamat / Blok Rumah <span class="text-red-500">*</span></label>
+          <label class="block text-[11px] font-semibold text-slate-600 mb-1">Alamat / Blok Rumah</label>
           <input type="text" id="buyer-address-input" value="${state.buyerAddress || ''}"
             oninput="state.buyerAddress = this.value; localStorage.setItem('buring_buyer_address', this.value);"
             placeholder="Contoh: CitraGarden Blok B3/12" 
@@ -886,23 +880,8 @@ function removeCartItem(cartId) {
 
 function checkoutMerchant(merchantId) {
   const buyerName = (state.buyerName || "").trim();
-  const buyerPhone = (state.buyerPhone || "").trim();
   const buyerAddress = (state.buyerAddress || "").trim();
   const deliveryNotes = (state.deliveryNotes || "").trim();
-
-  if (!buyerName) {
-    showToast("⚠️ Mohon isi Nama Pemesan terlebih dahulu!");
-    const input = document.getElementById("buyer-name-input");
-    if (input) input.focus();
-    return;
-  }
-
-  if (!buyerAddress) {
-    showToast("⚠️ Mohon isi Alamat / Blok Rumah di Buring!");
-    const input = document.getElementById("buyer-address-input");
-    if (input) input.focus();
-    return;
-  }
 
   const items = state.cart.filter((i) => i.merchantId === merchantId);
   if (items.length === 0) return;
