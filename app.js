@@ -19,7 +19,6 @@ let state = {
   currentProductModal: null,
   activeView: "menu", // 'menu' | 'recap'
   buyerName: localStorage.getItem("buring_buyer_name") || "",
-  buyerPhone: localStorage.getItem("buring_buyer_phone") || "",
   buyerAddress: localStorage.getItem("buring_buyer_address") || "",
   deliveryNotes: localStorage.getItem("buring_delivery_notes") || "",
   recapMerchantFilter: "all"
@@ -785,7 +784,6 @@ function renderCartDrawer() {
         <div>
           <label class="block text-[11px] font-semibold text-slate-600 mb-1">No. WhatsApp <span class="text-slate-400 font-normal lowercase">(opsional)</span></label>
           <input type="tel" id="buyer-phone-input" value="${state.buyerPhone || ''}"
-            oninput="state.buyerPhone = this.value; localStorage.setItem('buring_buyer_phone', this.value);"
             placeholder="Contoh: 08123456789" 
             class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-emerald-600 font-medium" />
         </div>
@@ -916,9 +914,10 @@ function checkoutMerchant(merchantId) {
   let message = `*PESANAN DARI WARGA BURING HUB*\n`;
   message += `━━━━━━━━━━━━━━━━━━━━━\n`;
   message += `Halo ${sample.merchantOwner} (${sample.merchantName}), saya mau pesan:\n\n`;
-  message += `👤 *Nama:* ${buyerName}\n`;
-  if (buyerPhone) message += `📱 *No HP:* ${buyerPhone}\n`;
-  message += `🏠 *Alamat Antar:* ${buyerAddress}\n`;
+  if (buyerName) { message += `\n👤 *Nama:* ${buyerName}`; }
+  else { message += `\n👤 *Nama:* (Tidak diisi)`; }
+  if (buyerAddress) { message += `\n🏠 *Alamat Antar:* ${buyerAddress}`; }
+  else { message += `\n🏠 *Alamat Antar:* (Tidak diisi)`; }
   if (deliveryNotes) message += `⏰ *Waktu / Catatan:* _${deliveryNotes}_\n`;
   message += `━━━━━━━━━━━━━━━━━━━━━\n`;
   message += `📋 *Rincian Menu:*\n`;
